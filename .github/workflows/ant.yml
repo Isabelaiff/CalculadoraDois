@@ -32,6 +32,7 @@ jobs:
       run: |
             cd src
             java -cp . CalculadoraDoisTeste
+            
     - name: Obtendo a versão atual 
       id: get_version 
       run: echo ::set-output name=version::$(cat version.txt) 
@@ -44,7 +45,7 @@ jobs:
       name: Build & push Docker image 
       with: 
         image: isabelaiff/calculadoradois
-        tags: latest, ${{ steps.increment_version.outputs.version }} 
+        tags: ${{ steps.increment_version.outputs.version }} 
         registry: docker.io 
         dockerfile: dockerfile 
         username: ${{ secrets.DOCKER_USERNAME }} 
